@@ -3,6 +3,7 @@ import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
 export interface HitCounterProps {
     downstream: lambda.IFunction;
+    readCapacity?: number;
 }
 export declare class HitCounter extends Construct {
     readonly handler: lambda.Function;
