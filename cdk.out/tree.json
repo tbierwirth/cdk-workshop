@@ -496,15 +496,7 @@
                                                           {
                                                             "Ref": "AWS::Partition"
                                                           },
-                                                          ":logs:",
-                                                          {
-                                                            "Ref": "AWS::Region"
-                                                          },
-                                                          ":",
-                                                          {
-                                                            "Ref": "AWS::AccountId"
-                                                          },
-                                                          ":log-group:/aws/codebuild/",
+                                                          ":logs:us-east-2:991510437442:log-group:/aws/codebuild/",
                                                           {
                                                             "Ref": "PipelineBuildSynthCdkBuildProject6BEFA8E6"
                                                           }
@@ -519,15 +511,7 @@
                                                           {
                                                             "Ref": "AWS::Partition"
                                                           },
-                                                          ":logs:",
-                                                          {
-                                                            "Ref": "AWS::Region"
-                                                          },
-                                                          ":",
-                                                          {
-                                                            "Ref": "AWS::AccountId"
-                                                          },
-                                                          ":log-group:/aws/codebuild/",
+                                                          ":logs:us-east-2:991510437442:log-group:/aws/codebuild/",
                                                           {
                                                             "Ref": "PipelineBuildSynthCdkBuildProject6BEFA8E6"
                                                           },
@@ -554,15 +538,7 @@
                                                         {
                                                           "Ref": "AWS::Partition"
                                                         },
-                                                        ":codebuild:",
-                                                        {
-                                                          "Ref": "AWS::Region"
-                                                        },
-                                                        ":",
-                                                        {
-                                                          "Ref": "AWS::AccountId"
-                                                        },
-                                                        ":report-group/",
+                                                        ":codebuild:us-east-2:991510437442:report-group/",
                                                         {
                                                           "Ref": "PipelineBuildSynthCdkBuildProject6BEFA8E6"
                                                         },
@@ -704,11 +680,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":iam::",
-                                                  {
-                                                    "Ref": "AWS::AccountId"
-                                                  },
-                                                  ":root"
+                                                  ":iam::991510437442:root"
                                                 ]
                                               ]
                                             }
@@ -822,11 +794,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":iam::",
-                                                  {
-                                                    "Ref": "AWS::AccountId"
-                                                  },
-                                                  ":root"
+                                                  ":iam::991510437442:root"
                                                 ]
                                               ]
                                             }
@@ -979,15 +947,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":logs:",
-                                                  {
-                                                    "Ref": "AWS::Region"
-                                                  },
-                                                  ":",
-                                                  {
-                                                    "Ref": "AWS::AccountId"
-                                                  },
-                                                  ":log-group:/aws/codebuild/",
+                                                  ":logs:us-east-2:991510437442:log-group:/aws/codebuild/",
                                                   {
                                                     "Ref": "PipelineUpdatePipelineSelfMutationDAA41400"
                                                   }
@@ -1002,15 +962,7 @@
                                                   {
                                                     "Ref": "AWS::Partition"
                                                   },
-                                                  ":logs:",
-                                                  {
-                                                    "Ref": "AWS::Region"
-                                                  },
-                                                  ":",
-                                                  {
-                                                    "Ref": "AWS::AccountId"
-                                                  },
-                                                  ":log-group:/aws/codebuild/",
+                                                  ":logs:us-east-2:991510437442:log-group:/aws/codebuild/",
                                                   {
                                                     "Ref": "PipelineUpdatePipelineSelfMutationDAA41400"
                                                   },
@@ -1037,15 +989,7 @@
                                                 {
                                                   "Ref": "AWS::Partition"
                                                 },
-                                                ":codebuild:",
-                                                {
-                                                  "Ref": "AWS::Region"
-                                                },
-                                                ":",
-                                                {
-                                                  "Ref": "AWS::AccountId"
-                                                },
-                                                ":report-group/",
+                                                ":codebuild:us-east-2:991510437442:report-group/",
                                                 {
                                                   "Ref": "PipelineUpdatePipelineSelfMutationDAA41400"
                                                 },
@@ -1066,18 +1010,7 @@
                                             }
                                           },
                                           "Effect": "Allow",
-                                          "Resource": {
-                                            "Fn::Join": [
-                                              "",
-                                              [
-                                                "arn:*:iam::",
-                                                {
-                                                  "Ref": "AWS::AccountId"
-                                                },
-                                                ":role/*"
-                                              ]
-                                            ]
-                                          }
+                                          "Resource": "arn:*:iam::991510437442:role/*"
                                         },
                                         {
                                           "Action": "cloudformation:DescribeStacks",
@@ -1213,14 +1146,6 @@
                 "path": "CdkWorkshopPipelineStack/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.15.0"
-                }
-              },
-              "Condition": {
-                "id": "Condition",
-                "path": "CdkWorkshopPipelineStack/CDKMetadata/Condition",
-                "constructInfo": {
-                  "fqn": "aws-cdk-lib.CfnCondition",
                   "version": "2.15.0"
                 }
               }
