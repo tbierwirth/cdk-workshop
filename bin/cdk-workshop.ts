@@ -5,8 +5,8 @@ import { WorkshopPipelineStack } from '../lib/pipeline-stack';
 const app = new cdk.App();
 new WorkshopPipelineStack(app, 'CdkWorkshopPipelineStack', {
   env: {
-    account: process.env.CDK_AWS_ACCOUNT,
-    region: process.env.REGION
+    account: '991510437442',
+    region: 'us-east-2'
   }
 });
 

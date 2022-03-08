@@ -32,7 +32,7 @@ junit.xml
 # CDK Context & Staging files
 cdk.context.json
 .cdk.staging/
-cdk.out/
+/cdk.out/
 *.tabl.json
 
 # Yarn error log
