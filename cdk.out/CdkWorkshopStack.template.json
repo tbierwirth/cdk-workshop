@@ -41,7 +41,7 @@
           "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
           },
-          "S3Key": "5c9b389c2a8e7a94837f759363266c9c1456bc7495b776ef59ccf7a2b2d0285c.zip"
+          "S3Key": "1be88e72d4842b528300a86b35219e17144b5954be6df25b99e02093dfd511d7.zip"
         },
         "Role": {
           "Fn::GetAtt": [
@@ -57,7 +57,105 @@
       ],
       "Metadata": {
         "aws:cdk:path": "CdkWorkshopStack/HelloHandler/Resource",
-        "aws:asset:path": "asset.5c9b389c2a8e7a94837f759363266c9c1456bc7495b776ef59ccf7a2b2d0285c",
+        "aws:asset:path": "asset.1be88e72d4842b528300a86b35219e17144b5954be6df25b99e02093dfd511d7",
+        "aws:asset:is-bundled": false,
+        "aws:asset:property": "Code"
+      }
+    },
+    "HelloHitCounterHits7AAEBF80": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "KeySchema": [
+          {
+            "AttributeName": "path",
+            "KeyType": "HASH"
+          }
+        ],
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "path",
+            "AttributeType": "S"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "CdkWorkshopStack/HelloHitCounter/Hits/Resource"
+      }
+    },
+    "HelloHitCounterHitCounterHandlerServiceRoleD45002B8": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole/Resource"
+      }
+    },
+    "HelloHitCounterHitCounterHandlerDAEA7B37": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+          },
+          "S3Key": "1be88e72d4842b528300a86b35219e17144b5954be6df25b99e02093dfd511d7.zip"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "HelloHitCounterHitCounterHandlerServiceRoleD45002B8",
+            "Arn"
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "DOWNSTREAM_FUNCTION_NAME": {
+              "Ref": "HelloHandler2E4FBA4D"
+            },
+            "HITS_TABLE_NAME": {
+              "Ref": "HelloHitCounterHits7AAEBF80"
+            }
+          }
+        },
+        "Handler": "hitcounter.handler",
+        "Runtime": "nodejs14.x"
+      },
+      "DependsOn": [
+        "HelloHitCounterHitCounterHandlerServiceRoleD45002B8"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Resource",
+        "aws:asset:path": "asset.1be88e72d4842b528300a86b35219e17144b5954be6df25b99e02093dfd511d7",
         "aws:asset:is-bundled": false,
         "aws:asset:property": "Code"
       }
@@ -122,7 +220,7 @@
         "aws:cdk:path": "CdkWorkshopStack/Endpoint/Account"
       }
     },
-    "EndpointDeployment318525DA5f8cdfe532107839d82cbce31f859259": {
+    "EndpointDeployment318525DA7a02bafcf1f33a692d15312adb602478": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -146,7 +244,7 @@
           "Ref": "EndpointEEF1FD8F"
         },
         "DeploymentId": {
-          "Ref": "EndpointDeployment318525DA5f8cdfe532107839d82cbce31f859259"
+          "Ref": "EndpointDeployment318525DA7a02bafcf1f33a692d15312adb602478"
         },
         "StageName": "prod"
       },
@@ -181,7 +279,7 @@
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
           "Fn::GetAtt": [
-            "HelloHandler2E4FBA4D",
+            "HelloHitCounterHitCounterHandlerDAEA7B37",
             "Arn"
           ]
         },
@@ -225,7 +323,7 @@
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
           "Fn::GetAtt": [
-            "HelloHandler2E4FBA4D",
+            "HelloHitCounterHitCounterHandlerDAEA7B37",
             "Arn"
           ]
         },
@@ -288,7 +386,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "HelloHandler2E4FBA4D",
+                    "HelloHitCounterHitCounterHandlerDAEA7B37",
                     "Arn"
                   ]
                 },
@@ -308,7 +406,7 @@
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
           "Fn::GetAtt": [
-            "HelloHandler2E4FBA4D",
+            "HelloHitCounterHitCounterHandlerDAEA7B37",
             "Arn"
           ]
         },
@@ -352,7 +450,7 @@
         "Action": "lambda:InvokeFunction",
         "FunctionName": {
           "Fn::GetAtt": [
-            "HelloHandler2E4FBA4D",
+            "HelloHitCounterHitCounterHandlerDAEA7B37",
             "Arn"
           ]
         },
@@ -418,7 +516,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "HelloHandler2E4FBA4D",
+                    "HelloHitCounterHitCounterHandlerDAEA7B37",
                     "Arn"
                   ]
                 },
@@ -435,7 +533,7 @@
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQ0U7DMAxFv4X31DAmeO+G9sS0qXzAlKWmeG2SqnYYVdV/J0lBjCefey37OnmE1RM83OkrF6Zui47OML2JNq2K1mnqtD3XGqZdcEbIO7V9d7d8xMESc1SzIm1hqnyHqZHqrHh90swoDGUqUcMmmBZloxmV7qnRglc9wvSagypkKXvKC/6wNMYHJ+oF+86PFiNG90bFg5ucukAc9WEwmEOOg/8af52fxQvvUT58nayF5lnlK9MSck1qHIL0Qf5NRd56V5PkNztfI1z4/nP1DOv4jxcmKoZ4LFmEaqnfnM534GMBAAA="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQQU/DMAyFfwv31DAmuHdDnEBMhfvkJmZ4bZKqThhV1f9OmoIoJ39+0Xt2fAubO7i5wosU2jRFyzWMrwF1o5J0HFu0tUEYH6PTgb1T+3e35gP1lkVSNylGC2PlW5of5jop2R5RhIJAOZfUwy7qhsIOhZQZHFpv0sQ3rBdbhklhxycMdMEBxqe8QkUSyo5z9B+WWvvognqgrvWDpYRJXXXpK6ccvECy+thryuMPvf8afpWf4IWfKXx4M0sLTZPK+88h7E5qbXqJoYvhnz3x3jvDIZ/FeUNwluvPzT1s06nPwlz0aWu2BNVSvwE6v0QohgEAAA=="
       },
       "Metadata": {
         "aws:cdk:path": "CdkWorkshopStack/CDKMetadata/Default"

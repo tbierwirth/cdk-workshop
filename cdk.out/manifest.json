@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/167331c738943597fa3d493f82258fd2dbffe5dc39f8e3503bde17957a86eb98.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/91996e258ff25e1662ce436edcc075fc605c0232e960b3f37f01b48ace69a520.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -51,6 +51,24 @@
             "data": "HelloHandler2E4FBA4D"
           }
         ],
+        "/CdkWorkshopStack/HelloHitCounter/Hits/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloHitCounterHits7AAEBF80"
+          }
+        ],
+        "/CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloHitCounterHitCounterHandlerServiceRoleD45002B8"
+          }
+        ],
+        "/CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloHitCounterHitCounterHandlerDAEA7B37"
+          }
+        ],
         "/CdkWorkshopStack/Endpoint/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -72,7 +90,7 @@
         "/CdkWorkshopStack/Endpoint/Deployment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "EndpointDeployment318525DA5f8cdfe532107839d82cbce31f859259"
+            "data": "EndpointDeployment318525DA7a02bafcf1f33a692d15312adb602478"
           }
         ],
         "/CdkWorkshopStack/Endpoint/DeploymentStage.prod/Resource": [

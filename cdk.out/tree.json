@@ -105,7 +105,7 @@
                       "s3Bucket": {
                         "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
                       },
-                      "s3Key": "5c9b389c2a8e7a94837f759363266c9c1456bc7495b776ef59ccf7a2b2d0285c.zip"
+                      "s3Key": "1be88e72d4842b528300a86b35219e17144b5954be6df25b99e02093dfd511d7.zip"
                     },
                     "role": {
                       "Fn::GetAtt": [
@@ -126,6 +126,185 @@
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_lambda.Function",
               "version": "2.15.0"
+            }
+          },
+          "HelloHitCounter": {
+            "id": "HelloHitCounter",
+            "path": "CdkWorkshopStack/HelloHitCounter",
+            "children": {
+              "Hits": {
+                "id": "Hits",
+                "path": "CdkWorkshopStack/HelloHitCounter/Hits",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkWorkshopStack/HelloHitCounter/Hits/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
+                      "aws:cdk:cloudformation:props": {
+                        "keySchema": [
+                          {
+                            "attributeName": "path",
+                            "keyType": "HASH"
+                          }
+                        ],
+                        "attributeDefinitions": [
+                          {
+                            "attributeName": "path",
+                            "attributeType": "S"
+                          }
+                        ],
+                        "provisionedThroughput": {
+                          "readCapacityUnits": 5,
+                          "writeCapacityUnits": 5
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_dynamodb.CfnTable",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "ScalingRole": {
+                    "id": "ScalingRole",
+                    "path": "CdkWorkshopStack/HelloHitCounter/Hits/ScalingRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_dynamodb.Table",
+                  "version": "2.15.0"
+                }
+              },
+              "HitCounterHandler": {
+                "id": "HitCounterHandler",
+                "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.15.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.15.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.15.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.15.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "code": {
+                          "s3Bucket": {
+                            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+                          },
+                          "s3Key": "1be88e72d4842b528300a86b35219e17144b5954be6df25b99e02093dfd511d7.zip"
+                        },
+                        "role": {
+                          "Fn::GetAtt": [
+                            "HelloHitCounterHitCounterHandlerServiceRoleD45002B8",
+                            "Arn"
+                          ]
+                        },
+                        "environment": {
+                          "variables": {
+                            "DOWNSTREAM_FUNCTION_NAME": {
+                              "Ref": "HelloHandler2E4FBA4D"
+                            },
+                            "HITS_TABLE_NAME": {
+                              "Ref": "HelloHitCounterHits7AAEBF80"
+                            }
+                          }
+                        },
+                        "handler": "hitcounter.handler",
+                        "runtime": "nodejs14.x"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.15.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.15.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.81"
             }
           },
           "Endpoint": {
@@ -255,7 +434,7 @@
                           "Ref": "EndpointEEF1FD8F"
                         },
                         "deploymentId": {
-                          "Ref": "EndpointDeployment318525DA5f8cdfe532107839d82cbce31f859259"
+                          "Ref": "EndpointDeployment318525DA7a02bafcf1f33a692d15312adb602478"
                         },
                         "stageName": "prod"
                       }
@@ -323,7 +502,7 @@
                                 "action": "lambda:InvokeFunction",
                                 "functionName": {
                                   "Fn::GetAtt": [
-                                    "HelloHandler2E4FBA4D",
+                                    "HelloHitCounterHitCounterHandlerDAEA7B37",
                                     "Arn"
                                   ]
                                 },
@@ -372,7 +551,7 @@
                                 "action": "lambda:InvokeFunction",
                                 "functionName": {
                                   "Fn::GetAtt": [
-                                    "HelloHandler2E4FBA4D",
+                                    "HelloHitCounterHitCounterHandlerDAEA7B37",
                                     "Arn"
                                   ]
                                 },
@@ -439,7 +618,7 @@
                                         ":lambda:path/2015-03-31/functions/",
                                         {
                                           "Fn::GetAtt": [
-                                            "HelloHandler2E4FBA4D",
+                                            "HelloHitCounterHitCounterHandlerDAEA7B37",
                                             "Arn"
                                           ]
                                         },
@@ -481,7 +660,7 @@
                             "action": "lambda:InvokeFunction",
                             "functionName": {
                               "Fn::GetAtt": [
-                                "HelloHandler2E4FBA4D",
+                                "HelloHitCounterHitCounterHandlerDAEA7B37",
                                 "Arn"
                               ]
                             },
@@ -530,7 +709,7 @@
                             "action": "lambda:InvokeFunction",
                             "functionName": {
                               "Fn::GetAtt": [
-                                "HelloHandler2E4FBA4D",
+                                "HelloHitCounterHitCounterHandlerDAEA7B37",
                                 "Arn"
                               ]
                             },
@@ -600,7 +779,7 @@
                                     ":lambda:path/2015-03-31/functions/",
                                     {
                                       "Fn::GetAtt": [
-                                        "HelloHandler2E4FBA4D",
+                                        "HelloHitCounterHitCounterHandlerDAEA7B37",
                                         "Arn"
                                       ]
                                     },
