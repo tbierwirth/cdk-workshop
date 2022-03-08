@@ -154,6 +154,16 @@
                   "Ref": "AWS::NoValue"
                 }
               ]
+            },
+            {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::GetAtt": [
+                  "HelloHandler2E4FBA4D",
+                  "Arn"
+                ]
+              }
             }
           ],
           "Version": "2012-10-17"
