@@ -122,6 +122,53 @@
         "aws:cdk:path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole/Resource"
       }
     },
+    "HelloHitCounterHitCounterHandlerServiceRoleDefaultPolicy1487A60A": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "HelloHitCounterHits7AAEBF80",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Ref": "AWS::NoValue"
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "HelloHitCounterHitCounterHandlerServiceRoleDefaultPolicy1487A60A",
+        "Roles": [
+          {
+            "Ref": "HelloHitCounterHitCounterHandlerServiceRoleD45002B8"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole/DefaultPolicy/Resource"
+      }
+    },
     "HelloHitCounterHitCounterHandlerDAEA7B37": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -151,6 +198,7 @@
         "Runtime": "nodejs14.x"
       },
       "DependsOn": [
+        "HelloHitCounterHitCounterHandlerServiceRoleDefaultPolicy1487A60A",
         "HelloHitCounterHitCounterHandlerServiceRoleD45002B8"
       ],
       "Metadata": {
@@ -533,7 +581,7 @@
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQQU/DMAyFfwv31DAmuHdDnEBMhfvkJmZ4bZKqThhV1f9OmoIoJ39+0Xt2fAubO7i5wosU2jRFyzWMrwF1o5J0HFu0tUEYH6PTgb1T+3e35gP1lkVSNylGC2PlW5of5jop2R5RhIJAOZfUwy7qhsIOhZQZHFpv0sQ3rBdbhklhxycMdMEBxqe8QkUSyo5z9B+WWvvognqgrvWDpYRJXXXpK6ccvECy+thryuMPvf8afpWf4IWfKXx4M0sLTZPK+88h7E5qbXqJoYvhnz3x3jvDIZ/FeUNwluvPzT1s06nPwlz0aWu2BNVSvwE6v0QohgEAAA=="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WQzU7EMAyEn4V7GlhWcO8u4gSiKtxXbmKKt/mpmoSlqvruuCmIcvLnSTye5Fbu7uTNFVxCoXRXGGrk9BpBdYKl02TANhrk9JiciuSdOL67LVc4WAqBu1kQWDnV3uBykGvlDakx38s0i7A/QQgYgyyXwr08JNVhPEBAoUcH1muO8AbN6pNhFtBTCxEvMMrpKWeqMcSyp7zrD0ulfHJRPGBv/GiRkdVNx29rs/EKPOrToDCvrwb/Nf4qP8YrP2P88HqRVppnkfMvJuRasR16SbFP8d8489E7TTH/k/Ma5Tlcf+7u5Z7//hyIioFTk0VZr/UbbJ2TKJcBAAA="
       },
       "Metadata": {
         "aws:cdk:path": "CdkWorkshopStack/CDKMetadata/Default"

@@ -23,7 +23,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/91996e258ff25e1662ce436edcc075fc605c0232e960b3f37f01b48ace69a520.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ea11402cacc2f2ab9239d19e0dea177a7696eb371f65d3fcc30f807af4297f8a.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -61,6 +61,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "HelloHitCounterHitCounterHandlerServiceRoleD45002B8"
+          }
+        ],
+        "/CdkWorkshopStack/HelloHitCounter/HitCounterHandler/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HelloHitCounterHitCounterHandlerServiceRoleDefaultPolicy1487A60A"
           }
         ],
         "/CdkWorkshopStack/HelloHitCounter/HitCounterHandler/Resource": [
