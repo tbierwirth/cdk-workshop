@@ -1,9 +1,71 @@
 {
   "Resources": {
+    "HelloHandlerServiceRole11EF7C63": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+              ]
+            ]
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "CdkWorkshopStack/HelloHandler/ServiceRole/Resource"
+      }
+    },
+    "HelloHandler2E4FBA4D": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+          },
+          "S3Key": "307eee558fc581bb74ef44007cffe262f9ff896ca55fe853677ab6db7561aed2.zip"
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "HelloHandlerServiceRole11EF7C63",
+            "Arn"
+          ]
+        },
+        "Handler": "hello.handler",
+        "Runtime": "nodejs14.x"
+      },
+      "DependsOn": [
+        "HelloHandlerServiceRole11EF7C63"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "CdkWorkshopStack/HelloHandler/Resource",
+        "aws:asset:path": "asset.307eee558fc581bb74ef44007cffe262f9ff896ca55fe853677ab6db7561aed2",
+        "aws:asset:is-bundled": false,
+        "aws:asset:property": "Code"
+      }
+    },
     "CDKMetadata": {
       "Type": "AWS::CDK::Metadata",
       "Properties": {
-        "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSMzTVM1BMLC/WTU7J1s3JTNKrDi5JTM7WcU7LC0otzi8tSk4FsZ3z81IySzLz82p18vJTUvWyivXLDM30jIGas4ozM3WLSvNKMnNT9YIgNAAI5dMNWAAAAA=="
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/zWO3Q6CMAxGn8X7UUWi90LiA+ADkLJNUn66hG56sfDubhCvTvs1PfmuUN7gcsKvFNpMxUw9xJdHPakUdXHGpTcI8RlYe3Ksmjf/500RLhBbN9scZ25Kqg5FrBd4ZKQd6qAn62uUdN7D5B+Ih/3Jigur3gWNY0OHmJ2xMMr5U96hSvVGISrWwJ4WC+3BH0S0Vgu6AAAA"
       },
       "Metadata": {
         "aws:cdk:path": "CdkWorkshopStack/CDKMetadata/Default"
